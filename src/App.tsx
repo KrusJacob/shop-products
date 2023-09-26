@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes, HashRouter, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { AnimatePresence } from "framer-motion";
+
+import Navigation from "./components/Navigation";
+import AboutPage from "./pages/AboutPage";
+import CartPage from "./pages/CartPage";
+import ProductsPage from "./pages/ProductsPage";
+import LoginPage from "./pages/LoginPage";
+import Page404 from "./pages/404Page";
+import Footer from "./components/Footer";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navigation />
+      <AnimatePresence mode="wait">
+        <main>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<AboutPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+          <Toaster />
+        </main>
+      </AnimatePresence>
+
+      <Footer />
+    </>
   );
 }
 
