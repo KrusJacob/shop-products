@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { scryRenderedDOMComponentsWithTag } from "react-dom/test-utils";
+import ProductsList from "../../components/ProductsList";
 import { CartState, IProduct } from "../../types";
 
 const LS_CART_KEY = "ReactTS_My_App_Cart";
 
 const initialState: CartState = {
   products: JSON.parse(localStorage.getItem(LS_CART_KEY) ?? "[]"),
+  // quantity: () => initialState.products.length,
 };
 
 export const cartSlice = createSlice({

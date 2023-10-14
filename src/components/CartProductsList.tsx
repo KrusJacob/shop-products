@@ -11,6 +11,7 @@ const CartProductsList: FC = () => {
       {products.map((product: IProduct) => (
         <CartProductItem product={product} key={product.id} />
       ))}
+      {!products.length && <div className="m-auto mt-5 text-xl">The cart is empty...</div>}
     </div>
   );
 };

@@ -29,6 +29,7 @@ body {
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  filter: brightness(1.1);
 }
 
 .product__item-enter {

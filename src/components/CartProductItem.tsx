@@ -14,7 +14,7 @@ const CartProductItem: FC<CartProductItemProps> = ({ product }) => {
     <div className="h-[680px] border m-1  p-4 flex flex-col justify-between bg-gradient-to-b to-blue-300 from-white shadow-md">
       <ProductItem product={product} inCart={true} />
       <div>
-        <p className="text-center w-full my-3 text-slate-700">Set the quantity</p>
+        <p className="text-center w-full my-3 font-medium text-slate-700">Set the quantity</p>
         <div className="flex rounded">
           <button
             onClick={() => setQuantity((prev) => (prev === 1 ? prev : prev - 1))}

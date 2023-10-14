@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import { Helmet } from "react-helmet";
+import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../hooks/actions";
@@ -19,10 +20,25 @@ const LoginPage: FC = () => {
   };
 
   const onSubmitHadler = (e: React.FormEvent<HTMLFormElement>) => {
-    if (loginDetails.login === value.login && loginDetails.password === value.password) {
+    e.preventDefault();
+
+    if (value.login !== loginDetails.login) {
+      toast.error("Such an account is not registered");
+      setValue({ login: "", password: "" });
+    } else if (value.password !== loginDetails.password) {
+      toast.error("Invalid password, try again");
+      setValue((prev) => ({ ...prev, password: "" }));
+    } else {
       loginON();
-      navigate("/products");
+      navigate("/cart");
     }
+
+    // if (loginDetails.login === value.login && loginDetails.password === value.password) {
+    //   loginON();
+    //   navigate("/cart");
+    // } else {
+    //   toast.error("Invalid password, try again");
+    // }
   };
 
   return (
@@ -47,6 +63,7 @@ const LoginPage: FC = () => {
               placeholder="Enter the login (user)"
               type="text"
               className="border-2 w-full mb-2 py-2 px-4 rounded"
+              required
             />
             <input
               value={value.password}
@@ -55,6 +72,7 @@ const LoginPage: FC = () => {
               placeholder="Enter the password (1234)"
               type="password"
               className="border-2 w-full mb-2 py-2 px-4 rounded"
+              required
             />
             <button
               className="bg-green-500 text-white text-xl w-full py-2 px-4 hover:bg-green-700 transition-all rounded"

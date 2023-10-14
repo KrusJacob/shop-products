@@ -17,7 +17,7 @@ function App() {
     <>
       <Navigation />
       <AnimatePresence mode="wait">
-        <main>
+        <main className="from-teal-100 from-10%  to-teal-50 to-40% bg-gradient-to-b">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<AboutPage />} />
             <Route path="/products" element={<ProductsPage />} />

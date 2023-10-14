@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useActions } from "../hooks/actions";
 import { IProduct } from "../types";
 
@@ -10,12 +11,40 @@ interface ProductItemProps {
 
 const ProductItem: FC<ProductItemProps> = ({ product, inCart }) => {
   const [details, setDetails] = useState<boolean>(false);
+  const [addInCart, SetAddInCart] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const { addProductCart, removeProductCart, showModal } = useActions();
 
   const onAddProductCart = () => {
-    toast.success("The product has been added to the card");
-    addProductCart(product);
+    if (!addInCart) {
+      toast.success("The product has been added to the card");
+      addProductCart(product);
+      SetAddInCart(true);
+    } else {
+      toast.custom((t) => (
+        <div
+          className={`${
+            t.visible ? "animate-enter" : "animate-leave"
+          } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        >
+          <div className="flex-1 w-0 p-4">
+            <span className="font-medium">{product.title}</span> has already been added to the cart
+          </div>
+          <div className="flex border-l border-gray-200">
+            <button
+              onClick={() => {
+                toast.dismiss();
+                navigate("/cart");
+              }}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-md font-medium hover:bg-green-300"
+            >
+              Go to cart
+            </button>
+          </div>
+        </div>
+      ));
+    }
   };
 
   const onRemoveProductCart = () => {

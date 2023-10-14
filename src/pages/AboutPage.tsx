@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const AboutPage: FC = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Helmet>
@@ -22,9 +24,18 @@ const AboutPage: FC = () => {
           <p className="text-6xl lg:text-8xl w-max m-auto p-8 rounded-md text-center font-semibold mt-20 bg-[var(--mainColor)] animate-zoomIn">
             Title Company
           </p>
-          <div className="text-2xl lg:text-3xl text-left mt-28  rounded-md max-w-[650px] ml-auto animate-backInRight  backdrop-blur-sm p-3 ">
+          <div className="m-auto w-max animate-zoomIn">
+            <button
+              onClick={() => navigate("/products")}
+              className="border px-8 mt-10 py-4 text-3xl rounded-md bg-blue-400 hover:shadow-[0_0_5px_5px_rgba(255,255,255,0.75)] ease-in duration-300 transition"
+            >
+              Show products
+            </button>
+          </div>
+
+          <div className="text-2xl lg:text-3xl text-left mt-14  rounded-md max-w-[650px] ml-auto animate-backInRight  backdrop-blur-sm p-3 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolore, ratione nisi amet blanditiis et
-            accusantium illo beatae suscipit cum quidem corrupti obcaecati exercitationem.
+            accusantium illo beatae suscipit cum quidem.
           </div>
         </div>
       </motion.section>

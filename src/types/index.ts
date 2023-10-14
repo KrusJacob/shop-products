@@ -14,6 +14,7 @@ export interface FilterState {
 
 export interface CartState {
   products: IProduct[];
+  // quantity: () => number;
 }
 
 export interface ModalState {
